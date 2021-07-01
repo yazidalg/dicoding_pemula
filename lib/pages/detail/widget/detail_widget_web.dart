@@ -1,7 +1,7 @@
 import 'package:dicoding_pemula/pages/detail/widget/card_grid_image.dart';
 import 'package:flutter/material.dart';
 
-class DetailPageWeb extends StatelessWidget {
+class DetailPageWeb extends StatefulWidget {
   final int? id;
   final String? image;
   final String? name;
@@ -21,6 +21,13 @@ class DetailPageWeb extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _DetailPageWebState createState() => _DetailPageWebState();
+}
+
+class _DetailPageWebState extends State<DetailPageWeb> {
+  bool isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
@@ -37,7 +44,7 @@ class DetailPageWeb extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage(image!),
+                        image: AssetImage(widget.image!),
                       ),
                       gradient: LinearGradient(
                         colors: [Colors.black, Colors.black45],
@@ -59,7 +66,7 @@ class DetailPageWeb extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        name!,
+                        widget.name!,
                         style: TextStyle(fontSize: 30),
                       ),
                     ),
@@ -76,22 +83,33 @@ class DetailPageWeb extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(top: 12, bottom: 12),
                           width: double.maxFinite,
-                          child: Text(description!),
+                          child: Text(widget.description!),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 12, bottom: 12),
                           width: double.maxFinite,
                           child: Text("Tanggal Lahir " +
-                              born! +
+                              widget.born! +
                               " (" +
-                              placeOfBirth! +
+                              widget.placeOfBirth! +
                               ")"),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 12, bottom: 12),
                           width: double.maxFinite,
-                          child: Text(album!.join(' | ')),
+                          child: Text(widget.album!.join(' | ')),
                         ),
+                        IconButton(
+                          color: isFavorite ? Colors.red : null,
+                          icon: isFavorite
+                              ? Icon(Icons.favorite)
+                              : Icon(Icons.favorite_border),
+                          onPressed: () {
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -103,7 +121,7 @@ class DetailPageWeb extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(16, 10, 16, 16),
               child: Text("Temukan Lainnya "),
             ),
-            CardGridWidget(id: id)
+            CardGridWidget(id: widget.id)
           ],
         ),
       ),

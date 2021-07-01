@@ -1,6 +1,8 @@
 import 'package:dicoding_pemula/model/model_singer.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/model_singer.dart';
+import '../../model/model_singer.dart';
 import '../detail/detail_page.dart';
 
 class GridSingerWidget extends StatelessWidget {
